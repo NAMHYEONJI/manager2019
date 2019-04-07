@@ -22,4 +22,4 @@ user_d.o : user.c
 	$(CC) -DDEBUG_MODE $(CFLAGS) -c -d $@ $^
 
 clean : 
-	rm *.o manager 
+	rm *.o manager manager_debug 
