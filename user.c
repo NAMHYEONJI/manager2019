@@ -16,7 +16,7 @@ int load_file(LOGIN* list[], char* filename){
       return count-1;
     }
     else if(yn == 2){
-      return -1;
+      return -100;
     }
   }
   else{
