@@ -1,25 +1,16 @@
-CC = gcc
-CFLAGE = -W -Wall
-TARGET = manager
-OBJECTS = main.o menu.o user.o
-DOBJECTS = main_d.o menu_d.o user_d.o
+all : manager_debug
 
-all : $(TARGET)
-
-manager_debug : $(DOBJECT)
-	$(CC) $(CFLAGE) -o $@ $^  
-
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGE) -o $@ $^
-
-main_d.o : main.c
-	$(CC) -DDEBUG_MODE $(CFLAGS) -c -o $@ $^
-
+manager_debug : menu_d.o user_d.o main.c
+	gcc -o manager_debug menu_d.o user_d.o main.c
 menu_d.o : menu.c
-	$(CC) -DDEBUG_MODE $(CFLAGS) -c -d $@ $^
-
+	gcc -DDBUG_MODE -c -o menu_d.o menu.c
 user_d.o : user.c
-	$(CC) -DDEBUG_MODE $(CFLAGS) -c -d $@ $^
-
-clean : 
-	rm *.o manager manager_debug 
+	gcc -DDBUG_MODE -c -o user_d.o user.c
+manager : menu.o user.o main.c
+	gcc -o manager menu.o user.o main.c
+user.o : user.c
+	gcc -c -o user.o user.c
+menu.o : menu.c
+	gcc -c -o menu.o menu.c
+clean :
+	rm *.o manager manager_debug
